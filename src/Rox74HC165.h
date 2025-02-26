@@ -41,7 +41,7 @@ class Rox74HC165 {
       digitalWrite(loadPin, HIGH);
       memset(states, 0, sizeof(states[0])*_muxCount);
     }
-    uint16_t getLength(){
+    uint64_t getLength(){
       return _muxCount*8;
     }
     void update(){
@@ -61,13 +61,13 @@ class Rox74HC165 {
       }
     }
     // return FALSE/LOW if bit is set (pin is grounded)
-    bool read(uint16_t n){
+    bool read(uint64_t n){
       if(n >= (_muxCount*8)){
         return HIGH;
       }
       return bitRead(states[(n>>3)], (n&0x07));
     }
-    bool readPin(uint16_t n){
+    bool readPin(uint64_t n){
       return read(n);
     }
 };
